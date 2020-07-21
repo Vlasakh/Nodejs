@@ -2,9 +2,11 @@
   <div class="nav-wrapper">
     <a href="#" class="brand-logo">Courses app</a>
     <ul id="nav-mobile" class="right hide-on-med-and-down">
-      <li><a href="/">Main</a></li>
-      <li><a href="/courses">Courses</a></li>
-      <li><a href="/add">Add course</a></li>
+      {{#each routes}}
+        {{#with this}}
+          <li><a href="{{path}}" title="{{title}}">{{name}}</a></li>
+        {{/with}}
+      {{/each}}
     </ul>
   </div>
 </nav>
