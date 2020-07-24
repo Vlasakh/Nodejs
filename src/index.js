@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const exphbs = require('express-handlebars');
-const { expressRoutes, route } = require('./routes');
+const { expressRoutes } = require('./routes');
 
 const PORT = process.env.PORT || 3000;
 
@@ -19,6 +19,7 @@ app.set('views', 'src/views');
 
 /*** static route */
 app.use(express.static('public'));
+app.use(express.urlencoded({ extended: true }));
 
 /*** add routes */
 expressRoutes.forEach((route) => app.use(route));
