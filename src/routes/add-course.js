@@ -1,5 +1,9 @@
 const post = (req, res) => {
-  res.render(template, { title: title, routes: routesConfig.values() });
+  console.log('req', req.body);
+
+  // todo: create the model
+
+  res.redirect('/courses');
 };
 
 module.exports = {
