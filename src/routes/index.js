@@ -34,8 +34,8 @@ const expressRoutes = Array.from(routesConfig.entries()).reduce((routers, [, rou
     routes.map((item) => {
       const { title, path, template, method = 'get', controller } = item;
 
-      router[method](path, (req, res) => {
-        const tmplVars = controller ? controller(req, res) : {};
+      router[method](path, async (req, res) => {
+        const tmplVars = (await controller) ? controller(req, res) : {};
 
         template && res.render(template, { title: title, routes: menu, ...(tmplVars || {}) });
       });

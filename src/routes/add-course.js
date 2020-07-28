@@ -1,7 +1,9 @@
-const post = (req, res) => {
-  console.log('req', req.body);
+const Course = require('../models/course');
 
-  // todo: create the model
+const post = async ({ body: { title, price, img } = {} }, res) => {
+  const course = new Course(title, price, img);
+
+  course.save();
 
   res.redirect('/courses');
 };
