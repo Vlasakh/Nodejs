@@ -40,7 +40,8 @@ class Course {
         if (err) {
           rej(err);
         } else {
-          resolve(JSON.parse(content));
+          console.log('content', content);
+          res(JSON.parse(content));
         }
       });
     });
