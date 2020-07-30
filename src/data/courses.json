@@ -1,1 +1,13 @@
-[{"title":"lkj","price":"lkjlk","id":"0fe9a7a8-ae49-4ee8-8050-f723b870df56"}]
+[
+  {
+    "title": "Angular",
+    "price": "555",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Angular_full_color_logo.svg/250px-Angular_full_color_logo.svg.png",
+    "id": "0fe9a7a8-ae49-4ee8-8050-f723b870df56"
+  },  {
+    "title": "React",
+    "price": "555",
+    "url": "https://www.inovex.de/blog/wp-content/uploads/2022/01/one-year-of-react-native.png",
+    "id": "0fe9a7a8-ae49-4ee8-8050-f723b870df56"
+  }
+]
