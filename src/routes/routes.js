@@ -1,29 +1,29 @@
 const courses = require('./courses');
-const { cart, cartAdd } = require('./cart');
+const { cart } = require('./cart');
 
-const {
-  PATH_HOME,
-  PATH_COURSES,
-  PATH_ADD_COURSE,
-  PATH_ABOUT,
-  PATH_CART,
-  PATH_CART_ADD,
-  PATH_EDIT_COURSE,
-} = require('./shareRoutes');
+const { ROUTES } = require('./shareRoutes');
 
 const routesConfig = [
-  { path: PATH_HOME, name: 'Main', title: 'Main page', template: 'index' },
+  { path: ROUTES.HOME, name: 'Main', title: 'Main page', template: 'index' },
 
-  { path: PATH_COURSES, name: 'Courses', title: 'Courses', template: 'courses', controller: courses.get },
-  { path: PATH_ADD_COURSE, name: 'Add', title: 'Add course', template: 'course-add' },
-  { path: PATH_ADD_COURSE, method: 'post', controller: courses.addNew },
-  { path: PATH_EDIT_COURSE, controller: courses.editForm, name: 'Edit', title: 'Edit course', template: 'course-edit' },
-  { path: PATH_EDIT_COURSE, method: 'post', controller: courses.editForm },
+  { path: ROUTES.COURSE.one, name: 'Course', title: 'Course', template: 'course', controller: courses.getCourse },
+  { path: ROUTES.COURSE.all, name: 'Courses', title: 'Courses', template: 'courses', controller: courses.getAll },
+  { path: ROUTES.COURSE.add, name: 'Add', title: 'Add course', template: 'course-add' },
+  { path: ROUTES.COURSE.add, method: 'post', controller: courses.addNew },
+  {
+    path: ROUTES.COURSE.edit,
+    controller: courses.editForm,
+    name: 'Edit',
+    title: 'Edit course',
+    template: 'course-edit',
+  },
+  { path: ROUTES.COURSE.edit, method: 'post', controller: courses.edit },
+  { path: ROUTES.COURSE.delete, method: 'post', controller: courses.del },
 
-  { path: PATH_ABOUT, name: 'About', title: 'About us', template: 'about' },
+  { path: ROUTES.ABOUT, name: 'About', title: 'About us', template: 'about' },
 
-  { path: PATH_CART, controller: cart, name: 'Cart', title: 'Cart', template: 'cart' },
-  { path: PATH_CART_ADD, controller: () => {}, method: 'post' },
+  { path: ROUTES.CART.one, controller: cart, name: 'Cart', title: 'Cart', template: 'cart' },
+  { path: ROUTES.CART.add, controller: () => {}, method: 'post' },
 ];
 
 module.exports = routesConfig;

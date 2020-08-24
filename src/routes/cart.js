@@ -1,6 +1,6 @@
 const Course = require('../models/Course');
 const Cart = require('../models/Cart');
-const { PATH_CART } = require('../routes/index');
+const { ROUTES } = require('../routes/index');
 
 const cart = async ({ body: { id } }, res) => {
   const cart = await Cart.fetch();
@@ -13,7 +13,7 @@ const cartAdd = async ({ body: { id } }, res) => {
 
   await Cart.add(course);
 
-  res.redirect(PATH_CART);
+  res.redirect(ROUTES.CART.one);
 };
 
 module.exports = {

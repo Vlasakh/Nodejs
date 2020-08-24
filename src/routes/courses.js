@@ -1,13 +1,13 @@
-const { PATH_COURSES, PATH_CART_ADD } = require('../routes/shareRoutes');
+const { ROUTES } = require('../routes/shareRoutes');
 const Course = require('../models/Course');
 
 class Courses {
-  get = async (req, res) => {
+  getAll = async () => {
     const courses = (await Course.find()).map(({ title, price, img, id }) => ({ title, price, img, id }));
 
     return {
       courses,
-      pathCartAdd: PATH_CART_ADD,
+      pathCartAdd: ROUTES.COURSE.add,
     };
   };
 
@@ -17,7 +17,7 @@ class Courses {
     try {
       await course.save();
 
-      res.redirect(PATH_COURSES);
+      res.redirect(ROUTES.COURSE.all);
     } catch (e) {
       console.error('Error', e);
     }
@@ -28,27 +28,41 @@ class Courses {
       return res.redirect('/');
     }
 
-    const course = await Course.findById(req.params.id);
+    const { title, price, img, id } = await Course.findById(req.params.id);
 
-    return { course };
+    return {
+      pathEditCourse: ROUTES.COURSE.edit.replace(':id', id),
+      pathDelCourse: ROUTES.COURSE.one.replace(':id', id),
+      course: { title, price, img, id },
+    };
   };
 
   edit = async ({ body: { title, price, img, id } }, res) => {
-    //
-
     try {
       await Course.findByIdAndUpdate(id, { title, price, img });
 
-      res.redirect(PATH_COURSES);
+      res.redirect(ROUTES.COURSE.all);
     } catch (e) {
       console.error('Error', e);
     }
   };
 
-  getCourse = async (req, res) => {
-    const course = await Course.findById(req.params.id);
+  del = async ({ body, body: { title, price, img, id } }, res) => {
+    console.log('---body', body);
 
-    return { course };
+    try {
+      // await Course.deleteOne({ _id: id });
+      //
+      // res.redirect(PATH_COURSES);
+    } catch (e) {
+      console.error('Error', e);
+    }
+  };
+
+  getCourse = async (req, ) => {
+    const { title, img, price } = await Course.findById(req.params.id);
+
+    return { course: { title, img, price } };
   };
 }
 

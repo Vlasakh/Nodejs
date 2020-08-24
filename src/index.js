@@ -1,5 +1,4 @@
 const express = require('express');
-const path = require('path');
 const exphbs = require('express-handlebars');
 const mongoose = require('mongoose');
 const { expressRoutes } = require('./routes');
@@ -29,7 +28,7 @@ expressRoutes.forEach((route) => app.use(route));
 
 async function start() {
   try {
-    await mongoose.connect(DB_URL, { useNewUrlParser: true });
+    await mongoose.connect(DB_URL, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false });
 
     app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
   } catch (e) {
