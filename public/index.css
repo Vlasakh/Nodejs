@@ -9,10 +9,12 @@
 .courses {
   display: flex;
 }
+
 .courses .col {
   display: flex;
   justify-content: stretch;
 }
+
 .courses img {
   width: 100%;
 }
@@ -40,5 +42,10 @@
 .card-action.actions {
   display: flex;
   align-items: center;
+  justify-content: space-between;
+}
+
+.edt-course-controls {
+  display: flex;
   justify-content: space-between;
 }

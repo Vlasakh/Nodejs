@@ -1,6 +1,6 @@
 const Course = require('../models/Course');
 const Cart = require('../models/Cart');
-const { ROUTES } = require('../routes/index');
+const { ROUTES } = require('../routes');
 
 const cart = async ({ body: { id } }, res) => {
   const cart = await Cart.fetch();

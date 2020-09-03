@@ -32,7 +32,7 @@ class Courses {
 
     return {
       pathEditCourse: ROUTES.COURSE.edit.replace(':id', id),
-      pathDelCourse: ROUTES.COURSE.one.replace(':id', id),
+      pathDelCourse: ROUTES.COURSE.delete.replace(':id', id),
       course: { title, price, img, id },
     };
   };
@@ -47,19 +47,16 @@ class Courses {
     }
   };
 
-  del = async ({ body, body: { title, price, img, id } }, res) => {
-    console.log('---body', body);
-
+  del = async ({ params: { id } }, res) => {
     try {
-      // await Course.deleteOne({ _id: id });
-      //
-      // res.redirect(PATH_COURSES);
+      await Course.deleteOne({ _id: id });
+      res.redirect(ROUTES.COURSE.all);
     } catch (e) {
       console.error('Error', e);
     }
   };
 
-  getCourse = async (req, ) => {
+  getCourse = async (req) => {
     const { title, img, price } = await Course.findById(req.params.id);
 
     return { course: { title, img, price } };

@@ -2,9 +2,14 @@
   <div class="nav-wrapper">
     <a href="#" class="brand-logo">Courses app</a>
     <ul id="nav-mobile" class="right hide-on-med-and-down">
-      {{#each routes}}
+      {{#each MainMenu}}
         {{#with this}}
-          <li><a href="{{path}}" title="{{title}}">{{name}}</a></li>
+          {{typeExternalLink}}
+          {{#if typeExternalLink}}
+            <li><a href="{{path}}" title="{{title}}" target="_blank">{{name}}</a></li>
+          {{else}}
+            <li><a href="{{path}}" title="{{title}}">{{name}}</a></li>
+          {{/if}}
         {{/with}}
       {{/each}}
     </ul>
