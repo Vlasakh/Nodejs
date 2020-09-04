@@ -7,12 +7,12 @@ class Courses {
 
     return {
       courses,
-      pathCartAdd: ROUTES.COURSE.add,
+      pathCartAdd: ROUTES.CART.add,
     };
   };
 
-  addNew = async ({ body: { title, price, img } = {} }, res) => {
-    const course = new Course({ title, price, img });
+  addNew = async ({ user, body: { title, price, img } = {} }, res) => {
+    const course = new Course({ title, price, img, userId: user });
 
     try {
       await course.save();
@@ -59,7 +59,7 @@ class Courses {
   getCourse = async (req) => {
     const { title, img, price } = await Course.findById(req.params.id);
 
-    return { course: { title, img, price } };
+    return { course: { title, img, price }, layout: 'course' };
   };
 }
 

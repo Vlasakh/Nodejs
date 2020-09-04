@@ -1,5 +1,5 @@
 const courses = require('../controllers/courses');
-const { cart } = require('../controllers/cart');
+const cart = require('../controllers/cart');
 
 const { ROUTES } = require('./shareRoutes');
 
@@ -26,8 +26,8 @@ const routesConfig = [
 
   { path: ROUTES.ABOUT, name: 'About', title: 'About us', template: 'about' },
 
-  { path: ROUTES.CART.one, controller: cart, name: 'Cart', title: 'Cart', template: 'cart' },
-  { path: ROUTES.CART.add, controller: () => {}, method: 'post' },
+  { path: ROUTES.CART.one, controller: cart.get, name: 'Cart', title: 'Cart', template: 'cart' },
+  { path: ROUTES.CART.add, controller: cart.add, method: 'post' },
 
   { path: ROUTES.MONGO, title: 'Open Mongo cluster', name: 'Mongo', type: ROUTES_TYPES.externalLink },
 ];
