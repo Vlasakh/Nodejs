@@ -6,6 +6,7 @@
     <thead>
       <tr>
         <th>Name</th>
+        <th>Price</th>
         <th>Count</th>
         <th></th>
       </tr>
@@ -15,6 +16,7 @@
       {{#each courses}}
       <tr>
         <td>{{title}}</td>
+        <td>{{price}}</td>
         <td>{{count}}</td>
         <td>
           <button class="btn btm-small js-remove" data-id="{{id}}">Remove</button>

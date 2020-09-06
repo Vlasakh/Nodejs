@@ -1,11 +1,15 @@
 const Course = require('../models/Course');
-const Cart = require('../models/Cart');
 const { ROUTES } = require('../routes/shareRoutes');
 
-const get = async ({ user, body: { id } }, res) => {
-  const cart = await Cart.fetch();
+const mapCartItems = (cart) => cart.items.map(({ courseId, count }) => ({ ...courseId._doc, count }));
+const calcPrice = (courses) => courses.reduce((res, { price }) => res + price, 0);
 
-  return { cart };
+const get = async ({ user,   }, ) => {
+  const data = await user.populate('cart.items.courseId').execPopulate();
+
+  const courses = mapCartItems(data.cart);
+
+  return { courses, price: calcPrice(courses) };
 };
 
 const add = async ({ user, body: { id } }, res) => {

@@ -19,7 +19,7 @@ const userSchema = new Schema({
         },
         courseId: {
           type: Schema.Types.ObjectId,
-          red: 'Course',
+          ref: 'Course',
           required: true,
         },
       },
