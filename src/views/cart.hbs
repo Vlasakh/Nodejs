@@ -19,7 +19,10 @@
         <td>{{price}}</td>
         <td>{{count}}</td>
         <td>
+          <form action="{{delPath}}" method="post">
+
           <button class="btn btm-small js-remove" data-id="{{id}}">Remove</button>
+          </form>
         </td>
       </tr>
       {{/each}}
@@ -27,6 +30,10 @@
   </table>
 
   <p><strong>Price:</strong> <span class="price">{{price}}</span></p>
+
+  <form action="{{orderPath}}" method="post">
+    <button type="submit" class="btn">Place order</button>
+  </form>
 {{else}}
   <p>Cart is empty</p>
 {{/if}}

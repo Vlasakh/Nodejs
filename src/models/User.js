@@ -27,17 +27,34 @@ const userSchema = new Schema({
   },
 });
 
-userSchema.methods.addToCart = function(course) {
+userSchema.methods.addToCart = function({ _id: id }) {
   const items = [...this.cart.items];
-  const idx = items.findIndex((co) => co.courseId.toString() === course._id.toString());
+  const idx = items.findIndex(
+    ({ courseId }) => console.log('_id', { id, courseId }) || courseId.toString() === id.toString(),
+  );
 
   if (idx >= 0) {
     items[idx].count++;
   } else {
     items.push({
-      courseId: course._id,
+      courseId: id,
       count: 1,
     });
+  }
+
+  this.cart = { items };
+
+  return this.save();
+};
+
+userSchema.methods.removeCartItem = function(id) {
+  let items = [...this.cart.items];
+  const idx = items.findIndex(({ courseId }) => courseId.toString() === id.toString());
+
+  if (items[idx].count === 1) {
+    items = items.filter(({ courseId }) => courseId.toString() !== id.toString());
+  } else {
+    items[idx].count--;
   }
 
   this.cart = { items };

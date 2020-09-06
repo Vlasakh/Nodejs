@@ -16,4 +16,11 @@ const course = new Schema({
   },
 });
 
+course.method('toClient', function() {
+  course.id = course._id;
+  delete course._id;
+
+  return course;
+});
+
 module.exports = model('Course', course);

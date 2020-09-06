@@ -28,6 +28,7 @@ const routesConfig = [
 
   { path: ROUTES.CART.one, controller: cart.get, name: 'Cart', title: 'Cart', template: 'cart' },
   { path: ROUTES.CART.add, controller: cart.add, method: 'post' },
+  { path: ROUTES.CART.delete, controller: cart.deleteItem, method: 'post' },
 
   { path: ROUTES.MONGO, title: 'Open Mongo cluster', name: 'Mongo', type: ROUTES_TYPES.externalLink },
 ];
