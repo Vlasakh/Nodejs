@@ -1,7 +1,15 @@
 const { ROUTES } = require('./shareRoutes');
 const routesConfig = require('./routes').default;
 
-const menuPathes = [ROUTES.HOME, ROUTES.COURSE.all, ROUTES.COURSE.add, ROUTES.ABOUT, ROUTES.CART.one, ROUTES.MONGO];
+const menuPathes = [
+  ROUTES.HOME,
+  ROUTES.COURSE.all,
+  ROUTES.COURSE.add,
+  ROUTES.ABOUT,
+  ROUTES.CART.one,
+  ROUTES.ORDERS,
+  ROUTES.MONGO,
+];
 
 const getType = (type) => {
   if (type) {

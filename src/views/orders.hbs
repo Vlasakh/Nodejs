@@ -1,0 +1,33 @@
+<h1>Orders</h1>
+
+<div id="card">
+  {{#if orders.length}}
+    <table>
+      <thead>
+      <tr>
+        <th>Date</th>
+        <th>Price</th>
+        <th>Courses</th>
+      </tr>
+      </thead>
+      <tbody>
+
+      {{#each orders}}
+        {{#with this}}
+          <tr>
+            <td>{{date}}</td>
+            <td>{{price}}</td>
+            <td>
+              {{#each courses}}
+                <div>{{title}} x {{count}}</div>
+              {{/each}}
+            </td>
+          </tr>
+        {{/with}}
+      {{/each}}
+      </tbody>
+    </table>
+  {{else}}
+    <p>There are no orders here</p>
+  {{/if}}
+</div>

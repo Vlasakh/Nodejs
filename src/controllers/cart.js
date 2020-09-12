@@ -5,7 +5,6 @@ const mapCartItems = (cart) =>
   cart.items.map(({ courseId, count }) => ({
     ...courseId._doc,
     count,
-    orderPath: ROUTES.CART.order,
     delPath: ROUTES.CART.delete.replace(':id', courseId.id),
   }));
 const calcPrice = (courses) => courses.reduce((res, { price }) => res + price, 0);
@@ -14,7 +13,11 @@ const get = async ({ user }) => {
   const { cart } = await user.populate('cart.items.courseId').execPopulate();
   const courses = mapCartItems(cart);
 
-  return { courses, price: calcPrice(courses) };
+  return {
+    courses,
+    price: calcPrice(courses),
+    ordersPath: ROUTES.ORDERS,
+  };
 };
 
 const add = async ({ user, body: { id } }, res) => {
