@@ -1,14 +1,22 @@
 const path = require('path');
 const { Router } = require('express');
 
-const router = Router();
+const todo = require('./todo');
 
-router.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '..', 'index.html'));
-});
+const getRoutes = ({ app }) => {
+  const router = Router();
 
-router.get('/app', (req, res) => {
-  res.sendFile(path.join(__dirname, '..', 'app.js'));
-});
+  router.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'index.html'));
+  });
 
-module.exports = router;
+  router.get('/app', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'app.js'));
+  });
+
+  app.use('/api/todo', todo);
+
+  return router;
+};
+
+module.exports = getRoutes;

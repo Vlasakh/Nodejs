@@ -12,6 +12,9 @@
   },
   "scripts": {
     "start": "node src/index.js",
-    "dev:api": "nodemon src/index.js"
+    "dev:api": "nodemon src/index.js",
+    "mysql:run": "docker run -p 3306:3306 --name local-mysql -e MYSQL_ROOT_PASSWORD=${pass} -d mysql ; docker ps -a",
+    "mysql:stop": "docker container stop local-mysql ; docker rm local-mysql",
+    "test": "echo ${pass}"
   }
 }
