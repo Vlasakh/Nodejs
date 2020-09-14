@@ -1,4 +1,3 @@
-const path = require('path');
 const { Router } = require('express');
 
 const Todo = require('../models/todo');
@@ -44,8 +43,20 @@ router.put('/:id', async ({ params: { id }, body: { done } }, res) => {
   }
 });
 
-router.delete('/:id', (req, res) => {
-  res.sendFile(path.join(__dirname, '..', 'index.html'));
+router.delete('/:id', async ({ params: { id } }, res) => {
+  try {
+    const todos = await Todo.findAll({
+      where: {
+        id: +id,
+      },
+    });
+
+    await todos[0].destroy();
+    res.status(204).json({});
+  } catch (e) {
+    console.error(e);
+    res.status(500).json({ message: 'Server error' });
+  }
 });
 
 module.exports = router;
