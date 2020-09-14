@@ -1,0 +1,24 @@
+{
+  "name": "api-learn",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-graphql": "^0.11.0",
+    "graphql": "^15.3.0",
+    "lodash": "^4.17.19",
+    "moment": "^2.27.0",
+    "mysql2": "^2.1.0",
+    "sequelize": "^6.3.5"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "dev:graph": "nodemon src/index.js",
+    "mysql:run": "docker run -p 3306:3306 --name local-mysql -e MYSQL_ROOT_PASSWORD=${pass} -d mysql ; docker ps -a",
+    "mysql:stop": "docker container stop local-mysql ; docker rm local-mysql",
+    "test": "echo ${pass}"
+  }
+}
