@@ -11,15 +11,25 @@ new Vue({
   methods: {
     addTodo() {
       const title = this.todoTitle.trim();
+
       if (!title) {
         return;
       }
-      this.todos.push({
-        title: title,
-        id: Math.random(),
-        done: false,
-        date: new Date(),
-      });
+
+      fetch('/api/todo', {
+        method: 'post',
+        headers: [['Content-Type', 'application/json']],
+        body: JSON.stringify({ title }),
+      })
+        .then((res) => res.json())
+        .then(({ todo }) => {
+          console.log('todo', todo);
+
+          this.todos.push(todo);
+          this.todoTitle = '';
+        })
+        .catch((e) => console.error('e', e));
+
       this.todoTitle = '';
     },
     removeTodo(id) {
