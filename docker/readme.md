@@ -8,7 +8,12 @@
 - docker rm local-mysql
 - docker exec -it local-mysql bash
 - docker save mysql > ~/mysql.tar
-- sudo docker commit [CONTAINER_ID] [new_image_name]
+- docker commit [CONTAINER_ID] [new_image_name]
+- docker images
 
 ## Install app
-- apt-get -y update ; apt-get -y install
+- apt-get -y update ; apt-get -y install mc
+
+## Path
+- /Users/volodymyrsakharov/Library/Group Containers/group.com.docker/settings.json - shared pathes
+- /usr/sbin/mysqld

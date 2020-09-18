@@ -17,7 +17,8 @@
   "scripts": {
     "start": "node src/index.js",
     "dev:graph": "nodemon src/index.js",
-    "mysql:run": "docker run mysql --name local-mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=${pass} -d ; docker ps -a",
+    "mysql:run": "docker run --name local-mysql -v /projects/NodejsLearn/docker/db/files:/mysqldb -v /projects/NodejsLearn/docker/db/conf:/etc/mysql/conf.d -p 3306:3306 -e MYSQL_ROOT_PASSWORD=${pass} -d mysql ",
+    "mysql:run1": "docker run mysql --name local-mysql -v /projects/NodejsLearn/docker:/etc/mysql/conf.d -p 3306:3306 -e MYSQL_ROOT_PASSWORD=${pass} -d ; docker ps -a",
     "mysql:stop": "docker container stop local-mysql ; docker rm local-mysql",
     "test": "echo ${pass}"
   }

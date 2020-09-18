@@ -1,0 +1,3 @@
+[mysqld]
+datadir=/mysqldb/files
+#datadir=/var/lib/mysqldb
