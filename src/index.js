@@ -1,6 +1,7 @@
 const express = require('express');
 const exphbs = require('express-handlebars');
 const mongoose = require('mongoose');
+const helmet = require('helmet');
 
 const { expressRoutes } = require('./routes');
 const User = require('./models/User');
@@ -34,6 +35,7 @@ app.use(async (req, res, next) => {
 /*** static route */
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
+app.use(helmet());
 
 /*** add routes */
 expressRoutes.forEach((route) => app.use(route));
