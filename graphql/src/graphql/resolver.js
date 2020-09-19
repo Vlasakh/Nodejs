@@ -1,32 +1,10 @@
 const Todo = require('../models/todo');
 
-const users = [
-  { name: 'Fedor', age: 30, email: 'fedor@xx.com' },
-  { name: 'Glofira', age: 23, email: 'glofira@xx.com' },
-];
-
 module.exports = {
-  test() {
-    return {
-      count: Math.trunc(Math.random() * 10),
-      users,
-    };
-  },
   random({ min, max, count }) {
     return Array(count)
       .fill()
       .map(() => Math.random() * (max - min) + min);
-  },
-  addTestUser({ user: { name, email } }) {
-    const user = {
-      name,
-      email,
-      age: Math.ceil(Math.random() * 30),
-    };
-
-    users.push(user);
-
-    return user;
   },
 
   async getTodos() {
@@ -44,11 +22,11 @@ module.exports = {
         done: false,
       });
     } catch (e) {
-      throw new Error('Fetch todos is not available');
+      throw new Error(`Cannot create todo ${title}`);
     }
   },
 
-  async completeTodo({ id }) {
+  async completeTodo({ id, title }) {
     try {
       const todo = await Todo.findByPk(id);
 
@@ -57,7 +35,21 @@ module.exports = {
 
       return todo;
     } catch (e) {
-      throw new Error('Fetch todos is not available');
+      throw new Error(`Cannot complete todo ${title}`);
+    }
+  },
+
+  async deleteTodo({ id, title }) {
+    try {
+      const todos = await Todo.findAll({
+        where: { id },
+      });
+
+      await todos[0].destroy();
+
+      return true;
+    } catch (e) {
+      throw new Error(`Cannot delete todo ${title}`);
     }
   },
 };

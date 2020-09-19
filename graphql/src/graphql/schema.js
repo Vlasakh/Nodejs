@@ -39,6 +39,7 @@ module.exports = buildSchema(`
   type Mutation {
     addTestUser(user: UserInput!): User!
     createTodo(todo: TodoInput!): Todo!
-    completeTodo(id: ID!): Todo!
+    completeTodo(id: ID!, title: String!): Todo!
+    deleteTodo(id: ID!, title: String!): Boolean!
   }  
 `);

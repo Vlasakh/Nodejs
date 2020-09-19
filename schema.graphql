@@ -1,0 +1,48 @@
+# This file was generated based on ".graphqlconfig". Do not edit manually.
+
+schema {
+    query: Query
+    mutation: Mutation
+}
+
+type Mutation {
+    addTestUser(user: UserInput!): User!
+    completeTodo(id: ID!, title: String!): Todo!
+    createTodo(todo: TodoInput!): Todo!
+    deleteTodo(id: ID!, title: String!): Boolean!
+}
+
+type Query {
+    getTodos: [Todo!]!
+    random(count: Int!, max: Int!, min: Int!): [Float!]!
+    test: TestType!
+}
+
+type TestType {
+    count: Int!
+    users: [User]!
+}
+
+type Todo {
+    createdAt: String
+    done: Boolean!
+    id: ID!
+    title: String!
+    updatedAt: String
+}
+
+type User {
+    age: Int!
+    email: String!
+    name: String!
+}
+
+input TodoInput {
+    done: Boolean
+    title: String!
+}
+
+input UserInput {
+    email: String!
+    name: String!
+}

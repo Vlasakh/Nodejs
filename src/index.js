@@ -7,7 +7,7 @@ const User = require('./models/User');
 
 const PORT = process.env.PORT || 3000;
 
-const DB_URL = `mongodb+srv://vlasakh:${process.env.auth}@cluster0.inerk.mongodb.net/shop?retryWrites=true&w=majority`;
+const DB_URL = `mongodb+srv://${process.env.MONGO_AUTH}@cluster0.inerk.mongodb.net/shop?retryWrites=true&w=majority`;
 
 const app = express();
 

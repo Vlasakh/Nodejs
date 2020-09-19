@@ -63,31 +63,13 @@ new Vue({
 
       this.todoTitle = '';
     },
-    removeTodo(id) {
-      const query = `
-        mutation {
-          completeTodo(id: "${id}") {
-            updatedAt
-          }
-        }
-      `;
 
-      fetch('/graphql', {
-        method: 'post',
-        headers: [['Content-Type', 'application/json'], ['Accept', 'application/json']],
-        body: JSON.stringify({ query }),
-      })
-        .then(() => {
-          this.todos = this.todos.filter((t) => t.id !== id);
-        })
-        .catch((e) => console.error('e', e));
-    },
-    completeTodo(id) {
+    completeTodo(id, title) {
       const query = `
         mutation {
-          completeTodo(id: "${id}") {
+          completeTodo(id: "${id}", title: "${title}") {
             id
-            updatedAt
+            updatedAt zzz
           }
         }
       `;
@@ -98,10 +80,33 @@ new Vue({
         body: JSON.stringify({ query }),
       })
         .then((res) => res.json())
-        .then(({ data: { completeTodo: todo } }) => {
+        .then((res) => {
+          console.log('rest', res);
+          const {
+            data: { completeTodo: todo },
+          } = res;
           const idx = this.todos.findIndex(({ id }) => id === todo.id);
 
           this.todos[idx].updatedAt = todo.updatedAt;
+        })
+        .catch((e) => console.error('e', e));
+    },
+
+    removeTodo(id, title) {
+      const query = `
+        mutation {
+          deleteTodo(id: "${id}", title: "${title}"){} 
+        }
+      `;
+
+      fetch('/graphql', {
+        method: 'post',
+        headers: [['Content-Type', 'application/json'], ['Accept', 'application/json']],
+        body: JSON.stringify({ query }),
+      })
+        .then((res) => {
+          console.log('res', res);
+          this.todos = this.todos.filter((t) => t.id !== id);
         })
         .catch((e) => console.error('e', e));
     },
